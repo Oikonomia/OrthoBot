@@ -8,7 +8,7 @@ A Discord bot for Eastern Orthodox daily readings, feast days, and fasts.
 Installation:
 
 ```bash
-git clone https://github.com/vypr/OrthoBot.git
+git clone https://github.com/Oikonomia/OrthoBot.git
 cd OrthoBot
 python3 -m venv venv
 source venv/bin/activate
