@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c872ee-962e-4a94-aa78-0eb1f70757c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/handlers/command_logic/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/commandbridge.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/settings/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/settings/misc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/strings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/commandbridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/settings/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/settings/misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/settings/misc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/commandlogic/strings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/strings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/commands.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,14 +42,14 @@
           <entry key="dummy" value="14" />
           <entry key="ini" value="84" />
           <entry key="json" value="670" />
-          <entry key="md" value="1136" />
+          <entry key="md" value="1221" />
           <entry key="py" value="9977" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="670" />
-          <entry key="Markdown" value="1136" />
+          <entry key="Markdown" value="1221" />
           <entry key="PLAIN_TEXT" value="98" />
           <entry key="Python" value="10355" />
         </counts>
@@ -57,7 +59,7 @@
           <entry key="gitignore" value="1" />
           <entry key="ini" value="7" />
           <entry key="json" value="2" />
-          <entry key="md" value="2" />
+          <entry key="md" value="3" />
           <entry key="py" value="19" />
           <entry key="versiondb" value="1" />
         </counts>
@@ -65,7 +67,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="2" />
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="9" />
           <entry key="Python" value="19" />
         </counts>
@@ -83,15 +85,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+            <state relative-caret-position="-377">
+              <caret line="48" column="30" lean-forward="true" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
               <folding>
                 <element signature="e#748#759#0" expanded="true" />
                 <marker date="1535106011980" expanded="true" signature="1084:1085" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="-1473">
+                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -208,7 +222,6 @@
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/strings.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/central.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/commandbridge.py" />
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/embed_builders.py" />
         <option value="$PROJECT_DIR$/src/config.example.ini" />
@@ -218,6 +231,7 @@
         <option value="$PROJECT_DIR$/src/handlers/command_logic/strings.json" />
         <option value="$PROJECT_DIR$/src/handlers/commands.py" />
         <option value="$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -398,18 +412,18 @@
     <frame x="54" y="27" width="1312" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980605" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24980605" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32890365" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32890365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3294702" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3305648" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3305648" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32890365" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -448,16 +462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2599">
           <caret line="113" column="14" selection-start-line="113" selection-start-column="14" selection-end-line="113" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="391">
-            <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -572,12 +576,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+        <state relative-caret-position="-377">
+          <caret line="48" column="30" lean-forward="true" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
           <folding>
             <element signature="e#748#759#0" expanded="true" />
             <marker date="1535106011980" expanded="true" signature="1084:1085" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-1473">
+            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

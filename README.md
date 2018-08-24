@@ -15,11 +15,13 @@ source venv/bin/activate
 cp src/config.example.ini src/config.ini
 $EDITOR src/config.ini
 pip install -U "https://github.com/Rapptz/discord.py/archive/rewrite.zip#egg=discord.py[voice]"
-pip install -U tinydb colorama requests bs4 lxml pyaes
+pip install -U tinydb colorama requests bs4 lxml goarch-api
 python src/bot.py
 ```
 
 ---
+
+# IGNORE ANYTHING PAST THIS POINT, IT HAS NOT BEEN EDITED
 
 Commands:
 
