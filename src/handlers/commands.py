@@ -21,7 +21,7 @@ import sys
 
 import discord
 
-from handlers.commandlogic import commandbridge as command_bridge
+from handlers.command_logic import command_bridge
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path + "/..")
@@ -30,36 +30,21 @@ import central  # noqa: E402
 
 command_map = {
     "orthobot": 0,
-    "search": 1,
+    # "search": 1,
+    "yesterday": 0,
     "today": 0,
+    "tomorrow": 0,
+    "saint": 1,
+    "feast": 1,
+    "lectionary": 3,
+    "reading": 3,
     "random": 0,
-    "verseoftheday": 0,
-    "votd": 0,
-    "setheadings": 1,
-    "headings": 0,
-    "setversenumbers": 1,
-    "versenumbers": 0,
-    "languages": 0,
-    "setlanguage": 1,
-    "setguildlanguage": 1,
-    "language": 0,
-    "guildlanguage": 0,
-    "setguildbrackets": 1,
-    "guildbrackets": 0,
-    "setvotdtime": 1,
-    "clearvotdtime": 0,
-    "votdtime": 0,
-    "setannouncements": 1,
-    "announcements": 0,
+    "setdailytime": 1,
+    "cleardailytime": 0,
+    "dailytime": 0,
     "users": 0,
     "servers": 0,
     "invite": 0,
-
-    "creeds": 0,
-    "apostles": 0,
-    "nicene": 0,
-    "chalcedonian": 0,
-    "athanasian": 0,
 }
 
 
@@ -97,55 +82,89 @@ class CommandHandler:
             orig_cmd = proper_command["orig"]
             if not is_owner_command(orig_cmd):
                 if orig_cmd != "search":
-                    if orig_cmd != "servers" and orig_cmd != "users":
-                        required_arguments = command_map[orig_cmd]
+                    if orig_cmd != "lectionary" and orig_cmd != "reading":
+                        if orig_cmd != "servers" and orig_cmd != "users":
+                            required_arguments = command_map[orig_cmd]
 
-                        if args is None:
-                            args = []
+                            if args is None:
+                                args = []
 
-                        if len(args) != required_arguments:
-                            embed = discord.Embed()
+                            if len(args) != required_arguments:
+                                embed = discord.Embed()
 
-                            embed.color = 16723502
-                            embed.set_footer(text=central.version, icon_url=central.icon)
+                                embed.color = 16723502
+                                embed.set_footer(text=central.version, icon_url=central.icon)
 
-                            response = "+<command> requires <count> arguments."
+                                response = "+<command> requires <count> arguments."
 
-                            response = response.replace("<command>", command)
-                            response = response.replace("<count>", str(required_arguments))
+                                response = response.replace("<command>", command)
+                                response = response.replace("<count>", str(required_arguments))
 
-                            embed.add_field(name="Error", value=response)
+                                embed.add_field(name="Error", value=response)
 
-                            return {
-                                "isError": True,
-                                "return": embed
-                            }
+                                return {
+                                    "isError": True,
+                                    "return": embed
+                                }
 
-                        return command_bridge.run_command(orig_cmd, args, sender, guild, channel)
+                            return command_bridge.run_command(orig_cmd, args, sender, guild, channel)
+                        else:
+                            required_arguments = command_map[orig_cmd]
+
+                            if args is None:
+                                args = []
+
+                            if len(args) != required_arguments:
+                                embed = discord.Embed()
+
+                                embed.color = 16723502
+                                embed.set_footer(text=central.version, icon_url=central.icon)
+
+                                response = "+<command> requires <count> arguments."
+                                response = response.replace("<command>", command)
+                                response = response.replace("<count>", str(required_arguments))
+
+                                embed.add_field(name="Error", value=response)
+
+                                return {
+                                    "isError": True,
+                                    "return": embed
+                                }
+
+                            return command_bridge.run_command(orig_cmd, [bot], sender, guild, channel)
                     else:
-                        required_arguments = command_map[orig_cmd]
-
                         if args is None:
                             args = []
 
-                        if len(args) != required_arguments:
+                        if len(args) != 3 and len(args) != 4:
                             embed = discord.Embed()
 
                             embed.color = 16723502
                             embed.set_footer(text=central.version, icon_url=central.icon)
 
-                            response = "+<command> requires <count> arguments."
-                            response = response.replace("<command>", command)
-                            response = response.replace("<count>", str(required_arguments))
-
-                            embed.add_field(name="Error", value=response)
+                            embed.add_field(name="Error", value=f"Usage: `~{orig_cmd} type id event` " +
+                                                                f"or `~{orig_cmd} type id event date`.")
 
                             return {
                                 "isError": True,
                                 "return": embed
                             }
+                        else:
+                            if args[0] == "epistle":
+                                if len(args) != 4:
+                                    embed = discord.Embed()
 
-                        return command_bridge.run_command(orig_cmd, [bot], raw_language, sender, guild, channel)
+                                    embed.color = 16723502
+                                    embed.set_footer(text=central.version, icon_url=central.icon)
+
+                                    embed.add_field(name="Error", value="Epistles must have a date argument. " +
+                                                                        f"Usage: `~{orig_cmd} type id event date`.")
+
+                                    return {
+                                        "isError": True,
+                                        "return": embed
+                                    }
+                            return command_bridge.run_command(orig_cmd, args, sender, guild, channel)
                 else:
                     if args is None:
                         args = []

@@ -24,7 +24,7 @@ import os
 import discord
 
 import central
-from handlers.commandlogic.settings import misc
+from handlers.command_logic import embed_builders
 from handlers.commands import CommandHandler
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -39,7 +39,7 @@ configVersion.read(dir_path + "/config.example.ini")
 class OrthoBot(discord.AutoShardedClient):
     def __init__(self, *args, loop=None, **kwargs):
         super().__init__(*args, loop=loop, **kwargs)
-        #self.bg_task = self.loop.create_task(self.run_dailies())
+        self.bg_task = self.loop.create_task(self.run_dailies())
         self.current_page = None
         self.total_pages = None
 
@@ -74,15 +74,15 @@ class OrthoBot(discord.AutoShardedClient):
                         current_time = datetime.datetime.utcnow().strftime("%H:%M")
 
                         if daily_time == current_time:
-                            pass
+                            embed = embed_builders.create_daily_embed()
+                            await channel.send("Here is today's daily readings and saints/feasts:")
+                            await channel.send(embed=embed)
             except Exception:
                 pass
 
             await asyncio.sleep(60)
 
     async def on_message(self, raw):
-        await self.wait_until_ready()
-
         sender = raw.author
         identifier = sender.name + "#" + sender.discriminator
         channel = raw.channel
@@ -231,11 +231,7 @@ class OrthoBot(discord.AutoShardedClient):
                             await msg.clear_reactions()
                     else:
                         if "reference" not in res and "text" not in res:
-                            # noinspection PyBroadException
-                            try:
-                                await channel.send(embed=res["message"])
-                            except Exception:
-                                pass
+                            await channel.send(embed=res["message"])
                         else:
                             if res["message"] is not None:
                                 await channel.send(res["message"])

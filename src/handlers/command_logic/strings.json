@@ -2,7 +2,7 @@
     "orthobot": "OrthoBot v<orthobotversion> by Elliott Pardee (vypr)",
     "code": "Code: <repositoryLink>",
 
-    "commandlist": "* `+search query` - search for saints/icons\n* `+random` - get a random saint/icon\n* `+yesterday` - get the readings and saints for yesterday\n* `+today` - get the readings and saints for today\n* `+tomorrow` - get the readings and saints for tomorrow\n* `+users` - list all users throughout all servers (not counting duplicates or bots)\n* `+servers` - show how many servers OrthoBot is in\n* `+invite` - get the invite link for OrthoBot",
+    "commandlist": "* `+search query` - search for saints/icons\n* `+random` - get a random daily reading\n* `+yesterday` - get the readings and saints for yesterday\n* `+today` - get the readings and saints for today\n* `+tomorrow` - get the readings and saints for tomorrow\n* `+users` - list all users throughout all servers (not counting duplicates or bots)\n* `+servers` - show how many servers OrthoBot is in\n* `+invite` - get the invite link for OrthoBot",
     "commandlist2": "* `+councils` - the ecumenical councils (contains further commands)\n* `+documents` - important documents in Church history (contains further commands)",
     "guildcommandlist": "* `+setdailytime TIME` - set the daily readings time to TIME (TIME must be 24h format and in UTC)\n* `+cleardailytime` - clear the daily readings time\n* `+dailytime` - see the daily readings time and channel",
 
@@ -18,8 +18,8 @@
     "setdailytimesuccess": "Set daily time successfully.",
     "setdailytimenoperm": "You must have the 'Manage Server' permission to modify a guild's daily time!",
     "setdailytimefail": "Failed to set daily time, the time must be 24-hour format like `01:00` or `13:00`.",
-    "dailytimeused": "The daily time for this guild is `<time>` and will be published in `#<channel>`.\n\nHave someone with the 'Manage Server' permission use `+<setdailytime>` to set a different daily time or `+<cleardailytime>` to clear the daily time.",
-    "nodailytimeused": "I couldn't find this guild in my database, has someone with the 'Manage Server' permission used `+<setdailytime>` yet?",
+    "dailytimeused": "The daily time for this guild is `<time>` and will be published in `#<channel>`.\n\nHave someone with the 'Manage Server' permission use `+setdailytime` to set a different daily time or `+cleardailytime` to clear the daily time.",
+    "nodailytimeused": "I couldn't find this guild in my database, has someone with the 'Manage Server' permission used `+setdailytime` yet?",
     "cleardailytimesuccess": "Cleared daily time successfully.",
     "cleardailytimenoperm": "You must have the 'Manage Server' permission to clear a guild's daily time!",
 

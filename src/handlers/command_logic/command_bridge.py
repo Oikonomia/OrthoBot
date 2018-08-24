@@ -20,22 +20,11 @@ import json
 import math
 import os
 import sys
-from datetime import date, timedelta
-from http.client import HTTPConnection
-import logging
-import html
 
 import discord
-import requests
-from bs4 import BeautifulSoup
 
-HTTPConnection.debuglevel = 0
-
-logging.getLogger("requests").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
-
-from handlers.commandlogic.settings import misc
+from handlers.command_logic.settings import misc
+from . import embed_builders
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path + "/../..")
@@ -51,27 +40,28 @@ def run_command(command, args, user, guild, channel):
 
     if command == "orthobot":
         embed.title = lang["orthobot"].replace("<orthobotversion>", central.version.split("v")[1])
-        embed.description = lang["code"].replace("repositoryLink", "https://github.com/vypr/OrthoBot")
+        embed.description = lang["code"].replace("repositoryLink", "https://github.com/Oikonomia/OrthoBot")
 
         embed.color = 303102
+        embed.set_thumbnail(url=central.icon)
         embed.set_footer(text=central.version, icon_url=central.icon)
 
         response = lang["commandlist"]
-        response2 = lang["commandlist2"]
+        #response2 = lang["commandlist2"]
         response3 = lang["guildcommandlist"]
 
         response = response.replace("<orthobotversion>", central.version)
         response = response.replace("* ", "")
         response = response.replace("+", central.config["OrthoBot"]["commandPrefix"])
 
-        response2 = response2.replace("* ", "")
-        response2 = response2.replace("+", central.config["OrthoBot"]["commandPrefix"])
+        #response2 = response2.replace("* ", "")
+        #response2 = response2.replace("+", central.config["OrthoBot"]["commandPrefix"])
 
         response3 = response3.replace("* ", "")
         response3 = response3.replace("+", central.config["OrthoBot"]["commandPrefix"])
 
         embed.add_field(name=lang["commandlistName"], value=response, inline=False)
-        embed.add_field(name=lang["councillistName"], value=response2, inline=False)
+        #embed.add_field(name=lang["councillistName"], value=response2, inline=False)
         embed.add_field(name=lang["guildcommandlistName"], value=response3, inline=False)
 
         return {
@@ -138,8 +128,46 @@ def run_command(command, args, user, guild, channel):
                     "level": "info",
                     "message": pages[0]
                 }
+    elif command == "yesterday":
+        return_embed = embed_builders.create_daily_embed("yesterday")
+
+        return {
+            "level": "info",
+            "message": return_embed
+        }
     elif command == "today":
-        return_embed = create_embed()
+        return_embed = embed_builders.create_daily_embed()
+
+        return {
+            "level": "info",
+            "message": return_embed
+        }
+    elif command == "tomorrow":
+        return_embed = embed_builders.create_daily_embed("tomorrow")
+
+        return {
+            "level": "info",
+            "message": return_embed
+        }
+    elif command == "random":
+        return_embed = embed_builders.create_daily_embed("random")
+
+        return {
+            "level": "info",
+            "message": return_embed
+        }
+    elif command == "saint" or command == "feast":
+        return_embed = embed_builders.create_saint_embed(args[0])
+
+        return {
+            "level": "info",
+            "message": return_embed
+        }
+    elif command == "lectionary" or command == "reading":
+        if len(args) == 4:
+            return_embed = embed_builders.create_lectionary_embed(args[0], args[1], args[2], _date=args[3])
+        else:
+            return_embed = embed_builders.create_lectionary_embed(args[0], args[1], args[2])
 
         return {
             "level": "info",
@@ -151,7 +179,7 @@ def run_command(command, args, user, guild, channel):
         if str(user.id) != central.config["OrthoBot"]["owner"]:
             if not perms.manage_guild:
                 embed.color = 16723502
-                embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["setdailytime"],
+                embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "setdailytime",
                                 value=lang["setdailytimenoperm"])
 
                 return {
@@ -163,7 +191,7 @@ def run_command(command, args, user, guild, channel):
             embed.color = 303102
             embed.set_footer(text=central.version, icon_url=central.icon)
 
-            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["setdailytime"],
+            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "setdailytime",
                             value=lang["setdailytimesuccess"])
 
             return {
@@ -172,7 +200,7 @@ def run_command(command, args, user, guild, channel):
             }
         else:
             embed.color = 16723502
-            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["setdailytime"],
+            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "setdailytime",
                             value=lang["setdailytimefail"])
 
             return {
@@ -185,7 +213,7 @@ def run_command(command, args, user, guild, channel):
         if str(user.id) != central.config["OrthoBot"]["owner"]:
             if not perms.manage_guild:
                 embed.color = 16723502
-                embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["cleardailytime"],
+                embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "cleardailytime",
                                 value=lang["cleardailytimenoperm"])
 
                 return {
@@ -197,7 +225,7 @@ def run_command(command, args, user, guild, channel):
             embed.color = 303102
             embed.set_footer(text=central.version, icon_url=central.icon)
 
-            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["cleardailytime"],
+            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "cleardailytime",
                             value=lang["cleardailytimesuccess"])
 
             return {
@@ -217,10 +245,8 @@ def run_command(command, args, user, guild, channel):
 
             response = response.replace("<time>", time + " UTC")
             response = response.replace("<channel>", channel)
-            response = response.replace("<setdailytime>", lang["commands"]["setdailytime"])
-            response = response.replace("<cleardailytime>", lang["commands"]["cleardailytime"])
 
-            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["dailytime"],
+            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "dailytime",
                             value=response)
 
             return {
@@ -230,25 +256,21 @@ def run_command(command, args, user, guild, channel):
         else:
             response = lang["nodailytimeused"]
 
-            response = response.replace("<setdailytime>", lang["commands"]["setdailytime"])
-
             embed.color = 16723502
-            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["dailytime"],
+            embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "dailytime",
                             value=response)
 
             return {
                 "level": "err",
                 "message": embed
             }
-    elif command == "random":
-        pass
     elif command == "users":
         embed.color = 303102
         embed.set_footer(text=central.version, icon_url=central.icon)
 
         processed = len(args[0].users)
 
-        embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["users"],
+        embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "users",
                         value=lang["users"] + ": " + str(processed))
 
         return {
@@ -261,87 +283,16 @@ def run_command(command, args, user, guild, channel):
 
         processed = len(args[0].guilds)
 
-        embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + lang["commands"]["servers"],
+        embed.add_field(name=central.config["OrthoBot"]["commandPrefix"] + "servers",
                         value=lang["servers"].replace("<count>", str(processed)))
 
         return {
             "level": "info",
             "message": embed
         }
-    elif command == "creeds":
-        embed.color = 303102
-        embed.set_footer(text=central.version, icon_url=central.icon)
-
-        response = lang["creedstext"]
-
-        response = response.replace("<apostles>", lang["commands"]["apostles"])
-        response = response.replace("<nicene>", lang["commands"]["nicene"])
-        response = response.replace("<chalcedonian>", lang["commands"]["chalcedonian"])
-        response = response.replace("<athanasian>", lang["commands"]["athanasian"])
-
-        embed.add_field(name=lang["creeds"], value=response)
-
-        return {
-            "level": "info",
-            "message": embed
-        }
-    elif command == "apostles":
-        embed.color = 303102
-        embed.set_footer(text=central.version, icon_url=central.icon)
-
-        embed.add_field(name=lang["apostlescreed"], value=lang["apostlestext1"])
-
-        return {
-            "level": "info",
-            "message": embed
-        }
-    elif command == "nicene":
-        embed.color = 303102
-        embed.set_footer(text=central.version, icon_url=central.icon)
-
-        embed.add_field(name=lang["nicenecreed"], value=lang["nicenetext1"])
-        embed.add_field(name=u"\u200B", value=lang["nicenetext2"])
-        embed.add_field(name=u"\u200B", value=lang["nicenetext3"])
-        embed.add_field(name=u"\u200B", value=lang["nicenetext4"])
-
-        return {
-            "level": "info",
-            "message": embed
-        }
-    elif command == "chalcedonian":
-        embed.color = 303102
-        embed.set_footer(text=central.version, icon_url=central.icon)
-
-        embed.add_field(name=lang["chalcedoniancreed"], value=lang["chalcedoniantext1"])
-        embed.add_field(name=u"\u200B", value=lang["chalcedoniantext2"])
-
-        return {
-            "level": "info",
-            "message": embed
-        }
-    elif command == "athanasian":
-        embed.color = 303102
-        embed.set_footer(text=central.version, icon_url=central.icon)
-
-        embed.add_field(name=lang["pseudoathanasiancreed"],
-                        value=lang["pseudoathanasiantext1"] + "https://www.ccel.org/creeds/athanasian.creed.html")
-
-        return {
-            "level": "info",
-            "message": embed
-        }
-    elif command == "invite":
-        return {
-            "level": "info",
-            "text": True,
-            "message": "<https://discordapp.com/oauth2/authorize?" +
-                       "client_id=361033318273384449&scope=bot&permissions=93248>"
-        }
 
 
-def run_owner_command(bot, command, args, lang):
-    embed = discord.Embed()
-
+def run_owner_command(bot, command, args):
     if command == "puppet":
         message = ""
 
@@ -509,64 +460,3 @@ def search(query):
         return {}
     else:
         return None
-
-
-def create_embed():
-    url = "https://oca.org/saints/lives"
-
-    saints_to_display = 3
-    resp = requests.get(url)
-
-    embed = discord.Embed()
-
-    embed.color = 303102
-    embed.set_footer(text=central.version + " | Saints from OCA, Readings from GOArch",
-                     icon_url=central.icon)
-
-    if resp is not None:
-        soup = BeautifulSoup(resp.text, "lxml")
-        section = soup.find("section", {"class": "saints"})
-        saints = section.find_all("article", {"class": "saint"})
-
-        for index, saint in enumerate(saints):
-            if index < saints_to_display:
-                if index == 0:
-                    embed.set_thumbnail(url = saint.find("img")["src"])
-
-                embed.add_field(name=saint.find("h2", {"class": "name"}).get_text(),
-                                value=saint.find("p", {"class": "description"}).get_text(), inline=False)
-
-        embed.add_field(name="For more about today's saints (including the remaining " +
-                             str(len(saints) - saints_to_display) + "):", value=url, inline=False)
-
-        goarch = requests.get("https://www.goarch.org/chapel")
-        goarch_soup = BeautifulSoup(goarch.text, "lxml")
-
-        readings = goarch_soup.find("ul", {"class": "oc-readings"}).find_all("li")
-
-        for reading in readings:
-            reading_link = reading.find("a")
-
-            if "type=epistle" in reading_link["href"]:
-                strong = reading_link.find("strong")
-                strong.decompose()
-
-                icon = reading_link.find("i")
-                icon.decompose()
-
-                embed.add_field(name="Epistle Reading", value=reading_link.get_text(), inline=True)
-            elif "type=gospel" in reading_link["href"]:
-                strong = reading_link.find("strong")
-                strong.decompose()
-
-                icon = reading_link.find("i")
-                icon.decompose()
-
-                embed.add_field(name="Gospel Reading", value=reading_link.get_text(), inline=True)
-
-        return embed
-    return None
-
-
-if __name__ == "__main__":
-    create_embed()
