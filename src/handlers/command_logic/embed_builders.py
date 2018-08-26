@@ -2,6 +2,7 @@ from datetime import date, timedelta
 import random
 import textwrap
 import os
+import re
 import sys
 
 from goarch_api.daily import Daily
@@ -40,16 +41,21 @@ def create_daily_embed(day="today"):
 
     saints_to_display = 3
 
-    try:
-        if day == "today":
-            daily = Daily()
-        else:
-            date_formatted = f"{dates[day].month}/{dates[day].day}/{dates[day].year}"
-            daily = Daily(date_formatted)
-    except Exception:
-        day = "random"
+    if day == "today":
+        daily = Daily()
+    elif day in dates:
         date_formatted = f"{dates[day].month}/{dates[day].day}/{dates[day].year}"
         daily = Daily(date_formatted)
+    else:
+        date_format = re.compile("[0-9]*\/[0-9]*\/[0-9]*")
+
+        if date_format.match(day):
+            day = day[1:] if day.startswith("0") else day
+            daily = Daily(day)
+        else:
+            day = "random"
+            date_formatted = f"{dates[day].month}/{dates[day].day}/{dates[day].year}"
+            daily = Daily(date_formatted)
 
     daily.get_data()
 
@@ -66,12 +72,7 @@ def create_daily_embed(day="today"):
 
         if index == 0:
             if daily.lectionary_title == saint.title:
-                embed.description = ""
-
-                if daily.fasting:
-                    embed.description = daily.fasting
-                else:
-                    embed.description = "No Fasting"
+                embed.description = daily.fasting if daily.fasting else "No Fasting"
 
                 if daily.tone:
                     embed.description += f" / {daily.tone}"
@@ -107,8 +108,7 @@ def create_daily_embed(day="today"):
 
         embed.add_field(name=title, value=reading.translation.short_title, inline=True)
 
-    embed.set_footer(icon_url=central.icon,
-                     text=f"{central.version} | Greek Orthodox Archdiocese of America")
+    embed.set_footer(icon_url=central.icon, text=f"{central.version} | Greek Orthodox Archdiocese of America")
 
     return embed
 
@@ -135,12 +135,14 @@ def create_saint_embed(_id):
 
     for reading in saint.lectionary:
         # this is not a Reading object, it is a LectionaryReading object
-        if reading.type == "E":
-            _type = "Epistle Reading"
-        elif reading.type == "G":
-            _type = "Gospel Reading"
-        elif reading.type == "MG":
-            _type = "Matins Gospel Reading"
+        type_strings = {
+            "E": "Epistle Reading",
+            "G": "Gospel Reading",
+            "MG": "Matins Gospel Reading"
+        }
+
+        if reading.type in type_strings:
+            _type = type_strings[reading.type]
         else:
             _type = reading.type
 
@@ -155,8 +157,7 @@ def create_saint_embed(_id):
     name = "For more about this saint/feast"
     embed.add_field(name=f"{name}:", value=saint.public_url, inline=False)
 
-    embed.set_footer(icon_url=central.icon,
-                     text=f"{central.version} | Greek Orthodox Archdiocese of America")
+    embed.set_footer(icon_url=central.icon, text=f"{central.version} | Greek Orthodox Archdiocese of America")
 
     return embed
 
@@ -176,13 +177,11 @@ def create_lectionary_embed(_type, _id, event, _date=None):
 
     for translation in lectionary.translations:
         reading_excerpt = textwrap.shorten(translation.body, width=600, placeholder="...")
-        embed.add_field(name=translation.short_title,
-                        value=reading_excerpt, inline=False)
+        embed.add_field(name=translation.short_title, value=reading_excerpt, inline=False)
 
     name = "For more about this lectionary/reading"
     embed.add_field(name=f"{name}:", value=lectionary.public_url, inline=False)
 
-    embed.set_footer(icon_url=central.icon,
-                     text=f"{central.version} | Greek Orthodox Archdiocese of America")
+    embed.set_footer(icon_url=central.icon, text=f"{central.version} | Greek Orthodox Archdiocese of America")
 
     return embed

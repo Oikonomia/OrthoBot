@@ -128,29 +128,8 @@ def run_command(command, args, user, guild, channel):
                     "level": "info",
                     "message": pages[0]
                 }
-    elif command == "yesterday":
-        return_embed = embed_builders.create_daily_embed("yesterday")
-
-        return {
-            "level": "info",
-            "message": return_embed
-        }
-    elif command == "today":
-        return_embed = embed_builders.create_daily_embed()
-
-        return {
-            "level": "info",
-            "message": return_embed
-        }
-    elif command == "tomorrow":
-        return_embed = embed_builders.create_daily_embed("tomorrow")
-
-        return {
-            "level": "info",
-            "message": return_embed
-        }
-    elif command == "random":
-        return_embed = embed_builders.create_daily_embed("random")
+    elif command == "daily":
+        return_embed = embed_builders.create_daily_embed(args[0])
 
         return {
             "level": "info",

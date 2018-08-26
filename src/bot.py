@@ -32,9 +32,6 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 config = configparser.ConfigParser()
 config.read(dir_path + "/config.ini")
 
-configVersion = configparser.ConfigParser()
-configVersion.read(dir_path + "/config.example.ini")
-
 
 class OrthoBot(discord.AutoShardedClient):
     def __init__(self, *args, loop=None, **kwargs):
@@ -83,6 +80,8 @@ class OrthoBot(discord.AutoShardedClient):
             await asyncio.sleep(60)
 
     async def on_message(self, raw):
+        await self.wait_until_ready()
+
         sender = raw.author
         identifier = sender.name + "#" + sender.discriminator
         channel = raw.channel
@@ -250,11 +249,8 @@ class OrthoBot(discord.AutoShardedClient):
                     central.log_message(res["level"], shard, identifier, source, config["OrthoBot"]["commandPrefix"]
                                         + command + " " + clean_args)
                 else:
-                    # noinspection PyBroadException
-                    try:
+                    if "return" in res:
                         await channel.send(embed=res["return"])
-                    except Exception:
-                        pass
 
 
 if int(config["OrthoBot"]["shards"]) > 1:

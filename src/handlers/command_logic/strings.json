@@ -2,7 +2,7 @@
     "orthobot": "OrthoBot v<orthobotversion> by Elliott Pardee (vypr)",
     "code": "Code: <repositoryLink>",
 
-    "commandlist": "* `+search query` - search for saints/icons\n* `+random` - get a random daily reading\n* `+yesterday` - get the readings and saints for yesterday\n* `+today` - get the readings and saints for today\n* `+tomorrow` - get the readings and saints for tomorrow\n* `+users` - list all users throughout all servers (not counting duplicates or bots)\n* `+servers` - show how many servers OrthoBot is in\n* `+invite` - get the invite link for OrthoBot",
+    "commandlist": "* `+search query` - search for saints/icons\n* `+random` - get a random daily reading\n* `+daily yesterday/today/tomorrow/random/date` - get the readings and saints for the argument you give\n* `+users` - list all users throughout all servers (not counting duplicates or bots)\n* `+servers` - show how many servers OrthoBot is in\n* `+invite` - get the invite link for OrthoBot",
     "commandlist2": "* `+councils` - the ecumenical councils (contains further commands)\n* `+documents` - important documents in Church history (contains further commands)",
     "guildcommandlist": "* `+setdailytime TIME` - set the daily readings time to TIME (TIME must be 24h format and in UTC)\n* `+cleardailytime` - clear the daily readings time\n* `+dailytime` - see the daily readings time and channel",
 

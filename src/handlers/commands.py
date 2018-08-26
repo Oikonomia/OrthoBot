@@ -31,9 +31,7 @@ import central  # noqa: E402
 command_map = {
     "orthobot": 0,
     # "search": 1,
-    "yesterday": 0,
-    "today": 0,
-    "tomorrow": 0,
+    "daily": 1,
     "saint": 1,
     "feast": 1,
     "lectionary": 3,
