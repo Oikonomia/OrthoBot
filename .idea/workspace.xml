@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c872ee-962e-4a94-aa78-0eb1f70757c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/command_logic/strings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/command_logic/strings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/central.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/central.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +33,7 @@
           <entry key="ini" value="84" />
           <entry key="json" value="761" />
           <entry key="md" value="1237" />
-          <entry key="py" value="10556" />
+          <entry key="py" value="10580" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -46,7 +41,7 @@
           <entry key="JSON" value="761" />
           <entry key="Markdown" value="1237" />
           <entry key="PLAIN_TEXT" value="98" />
-          <entry key="Python" value="10934" />
+          <entry key="Python" value="10958" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -55,7 +50,7 @@
           <entry key="ini" value="7" />
           <entry key="json" value="2" />
           <entry key="md" value="3" />
-          <entry key="py" value="19" />
+          <entry key="py" value="20" />
           <entry key="versiondb" value="1" />
         </counts>
       </usages-collector>
@@ -64,7 +59,7 @@
           <entry key="JSON" value="2" />
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="19" />
+          <entry key="Python" value="20" />
         </counts>
       </usages-collector>
     </session>
@@ -94,18 +89,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="345">
-                <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2599">
@@ -123,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
+            <state relative-caret-position="-279">
               <caret line="52" column="57" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -138,8 +121,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/config.example.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state relative-caret-position="184">
+              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/central.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="36" column="66" selection-start-line="36" selection-start-column="66" selection-end-line="36" selection-end-column="66" />
+              <folding>
+                <element signature="e#748#767#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -168,8 +163,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4632">
-              <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+            <state relative-caret-position="129">
+              <caret line="50" column="51" lean-forward="true" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
               <folding>
                 <element signature="e#748#762#0" expanded="true" />
               </folding>
@@ -214,7 +209,6 @@
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/settings/misc.py" />
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/strings.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/central.py" />
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/commandbridge.py" />
         <option value="$PROJECT_DIR$/src/handlers/commandlogic/embed_builders.py" />
         <option value="$PROJECT_DIR$/src/config.example.ini" />
@@ -225,6 +219,7 @@
         <option value="$PROJECT_DIR$/src/handlers/command_logic/strings.json" />
         <option value="$PROJECT_DIR$/src/handlers/command_logic/command_bridge.py" />
         <option value="$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py" />
+        <option value="$PROJECT_DIR$/src/central.py" />
       </list>
     </option>
   </component>
@@ -405,18 +400,18 @@
     <frame x="54" y="27" width="1312" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980605" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24980605" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32890365" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32890365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3294702" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3305648" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3305648" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32890365" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -468,16 +463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/central.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="45" column="36" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
-          <folding>
-            <element signature="e#748#767#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/goarch_api/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -519,13 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.example.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -537,16 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4632">
-          <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
-          <folding>
-            <element signature="e#748#762#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -580,10 +548,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/handlers/command_logic/embed_builders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
+        <state relative-caret-position="-279">
           <caret line="52" column="57" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="50" column="51" lean-forward="true" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+          <folding>
+            <element signature="e#748#762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.example.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/central.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="36" column="66" selection-start-line="36" selection-start-column="66" selection-end-line="36" selection-end-column="66" />
+          <folding>
+            <element signature="e#748#767#0" expanded="true" />
           </folding>
         </state>
       </provider>

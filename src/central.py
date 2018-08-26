@@ -34,7 +34,7 @@ config.read(dir_path + "/config.ini")
 configVersion = configparser.ConfigParser()
 configVersion.read(dir_path + "/config.example.ini")
 
-version = "OrthoBot v" + configVersion["meta"]["version"]
+version = "OrthoBot v" + configVersion["meta"]["version"] + " Beta"
 icon = "https://cdn.discordapp.com/avatars/479471696093642762/a2deba76dda32dc874a75ec5c5025f37.png"  # noqa: E501
 
 logger = VyLogger("default")
