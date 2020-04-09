@@ -23,6 +23,8 @@ import os
 
 import discord
 
+from discord.ext import tasks
+
 import central
 from handlers.command_logic import embed_builders
 from handlers.commands import CommandHandler
@@ -36,7 +38,7 @@ config.read(dir_path + "/config.ini")
 class OrthoBot(discord.AutoShardedClient):
     def __init__(self, *args, loop=None, **kwargs):
         super().__init__(*args, loop=loop, **kwargs)
-        self.bg_task = self.loop.create_task(self.run_dailies())
+        self.run_dailies.start()
         self.current_page = None
         self.total_pages = None
 
@@ -54,30 +56,28 @@ class OrthoBot(discord.AutoShardedClient):
 
         central.log_message("info", shard_id + 1, "global", "global", "connected")
 
+    @tasks.loop(seconds=60.0)
     async def run_dailies(self):
         await self.wait_until_ready()
 
-        while not self.is_closed():
-            # noinspection PyBroadException
-            try:
-                # a nice list comprehension for getting all the servers with daily stuff set
-                results = [x for x in central.guildDB.all() if "channel" in x and "time" in x]
+        # a nice list comprehension for getting all the servers with daily stuff set
+        results = [x for x in central.guildDB.all() if "channel" in x and "time" in x]
 
-                for item in results:
-                    if "channel" in item and "time" in item:
-                        channel = self.get_channel(int(item["channel"]))
-                        daily_time = item["time"]
+        for item in results:
+            if "channel" in item and "time" in item:
+                channel = self.get_channel(int(item["channel"]))
+                daily_time = item["time"]
 
-                        current_time = datetime.datetime.utcnow().strftime("%H:%M")
+                current_time = datetime.datetime.utcnow().strftime("%H:%M")
 
-                        if daily_time == current_time:
-                            embed = embed_builders.create_daily_embed()
-                            await channel.send("Here is today's daily readings and saints/feasts:")
-                            await channel.send(embed=embed)
-            except Exception:
-                pass
+                if daily_time == current_time:
+                    embed = embed_builders.create_daily_embed()
 
-            await asyncio.sleep(60)
+                    try:
+                        await channel.send("Here is today's daily readings and saints/feasts:")
+                        await channel.send(embed=embed)
+                    except discord.errors.Forbidden:
+                        pass
 
     async def on_message(self, raw):
         await self.wait_until_ready()

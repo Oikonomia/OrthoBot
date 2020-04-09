@@ -129,7 +129,7 @@ def run_command(command, args, user, guild, channel):
                     "message": pages[0]
                 }
     elif command == "daily":
-        return_embed = embed_builders.create_daily_embed(args[0])
+        return_embed = embed_builders.create_daily_embed(args[0] if args else None)
 
         return {
             "level": "info",

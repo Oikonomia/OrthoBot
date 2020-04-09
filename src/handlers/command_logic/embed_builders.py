@@ -46,16 +46,14 @@ def create_daily_embed(day="today"):
     elif day in dates:
         date_formatted = f"{dates[day].month}/{dates[day].day}/{dates[day].year}"
         daily = Daily(date_formatted)
-    else:
+    elif day is not None:
         date_format = re.compile("[0-9]*\/[0-9]*\/[0-9]*")
 
         if date_format.match(day):
             day = day[1:] if day.startswith("0") else day
             daily = Daily(day)
-        else:
-            day = "random"
-            date_formatted = f"{dates[day].month}/{dates[day].day}/{dates[day].year}"
-            daily = Daily(date_formatted)
+    else:
+        daily = Daily()
 
     daily.get_data()
 
@@ -94,13 +92,6 @@ def create_daily_embed(day="today"):
                                 value=f"© {saint.readings[0].copyright} // " + biography_excerpt, inline=False)
             else:
                 embed.add_field(name=f"{saint.title} ({saint.id})", value="No information provided.", inline=False)
-
-    name = "For more about today's saints and feasts"
-
-    if saints_to_display < len(daily.saints):
-        name += f" (including the remaining {str(len(daily.saints) - saints_to_display)})"
-
-    embed.add_field(name=f"{name}:", value=daily.public_url)
 
     for reading in daily.readings:
         title = f"{reading.type_bb.title()} Reading ({reading.id}, {reading.event})"
@@ -148,14 +139,11 @@ def create_saint_embed(_id):
 
         _type += f" ({reading.id}, {saint.id})"
 
-        embed.add_field(name=_type, value=reading.short_title, inline=True)
+        embed.add_field(name=_type, value=reading.short_title, inline=False)
 
     for hymn in saint.hymns:
         embed.add_field(name=f"{hymn.short_title} ({hymn.tone})",
                         value=f"© {hymn.translation.copyright} // {hymn.translation.body}", inline=False)
-
-    name = "For more about this saint/feast"
-    embed.add_field(name=f"{name}:", value=saint.public_url, inline=False)
 
     embed.set_footer(icon_url=central.icon, text=f"{central.version} | Greek Orthodox Archdiocese of America")
 
@@ -163,7 +151,7 @@ def create_saint_embed(_id):
 
 
 def create_lectionary_embed(_type, _id, event, _date=None):
-    lectionary = Lectionary(_type, _id, event, date=_date)
+    lectionary = Lectionary(_type.upper(), _id, event, date=_date)
     lectionary.get_data()
 
     embed = discord.Embed()
@@ -178,9 +166,6 @@ def create_lectionary_embed(_type, _id, event, _date=None):
     for translation in lectionary.translations:
         reading_excerpt = textwrap.shorten(translation.body, width=600, placeholder="...")
         embed.add_field(name=translation.short_title, value=reading_excerpt, inline=False)
-
-    name = "For more about this lectionary/reading"
-    embed.add_field(name=f"{name}:", value=lectionary.public_url, inline=False)
 
     embed.set_footer(icon_url=central.icon, text=f"{central.version} | Greek Orthodox Archdiocese of America")
 
