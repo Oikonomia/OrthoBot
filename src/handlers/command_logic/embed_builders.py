@@ -129,7 +129,8 @@ def create_saint_embed(_id):
         type_strings = {
             "E": "Epistle Reading",
             "G": "Gospel Reading",
-            "MG": "Matins Gospel Reading"
+            "MG": "Matins Gospel Reading",
+            "OT": "Old Testament Reading"
         }
 
         if reading.type in type_strings:
