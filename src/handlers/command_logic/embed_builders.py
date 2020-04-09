@@ -95,7 +95,8 @@ def create_daily_embed(day="today"):
 
     for reading in daily.readings:
         title = f"{reading.type_bb.title()} Reading ({reading.id}, {reading.event})"
-        title = title.replace("Mg ", "Matins Gospel ")
+        title = title.replace("Mg ", "MG ")
+        title = title.replace("Ot ", "OT ")
 
         embed.add_field(name=title, value=reading.translation.short_title, inline=True)
 
