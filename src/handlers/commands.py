@@ -87,7 +87,7 @@ class CommandHandler:
                             if args is None:
                                 args = []
 
-                            if True:
+                            if False:
                                 embed = discord.Embed()
 
                                 embed.color = 16723502
