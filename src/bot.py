@@ -65,7 +65,7 @@ class OrthoBot(discord.AutoShardedClient):
 
         for item in results:
             if "channel" in item and "time" in item:
-                channel = self.fetch_channel(int(item["channel"]))
+                channel = await self.fetch_channel(int(item["channel"]))
                 daily_time = item["time"]
 
                 current_time = datetime.datetime.utcnow().strftime("%H:%M")
